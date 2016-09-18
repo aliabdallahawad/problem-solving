@@ -82,15 +82,29 @@ const double eps = (1e-7);
 
 int main()
 {
-  ll l1, r1, l2, r2, k;
-  cin >> l1 >> r1 >> l2 >> r2 >> k;
-  ll maxL = max(l1, l2);
-  ll minR = min(r1, r2);
-  ll ret = 0;
-  if (maxL <= minR) {
-    ret = minR - maxL + 1;
-    if (k >= maxL && k <= minR) ret--;
+  ll n, sum = 0, tmp;
+  cin >> n;
+  list<ll> v;
+  rep(i, n) {
+    cin >> tmp;
+    v.insert(v.begin(), tmp);
   }
-  cout << ret << endl;
+  v.sort();
+  v.unique();
+  if (v.size() > 3) {
+    cout << "NO";
+    return 0;
+  } else if (v.size() == 3) {
+    vector<ll> s;
+    for (list<ll>::iterator it = v.begin(); it != v.end(); it++) {
+      s.pb(*it);
+    }
+    if (s[2]-s[1] != s[1]-s[0]) {
+        cout << "NO";
+        return 0;
+    }
+  }
+  cout << "YES";
+  cout << endl;
   return 0;
 }
